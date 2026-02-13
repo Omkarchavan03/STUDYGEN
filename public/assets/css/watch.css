@@ -1,0 +1,53 @@
+/* ===== WATCH PAGE ===== */
+
+.watch-wrapper {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+.video-title {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.video-meta {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 15px;
+}
+
+.video-player {
+    position: relative;
+    background: black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+
+/* Controls info */
+.video-info-box {
+    background: #020617;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.video-info-box p {
+    font-size: 14px;
+    color: #cbd5f5;
+}
+
+/* Login prompt */
+.login-required {
+    background: #7f1d1d;
+    color: #fecaca;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+    text-align: center;
+}

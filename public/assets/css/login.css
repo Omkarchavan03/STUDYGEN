@@ -1,0 +1,189 @@
+/* ===============================
+   RESET & BASE
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e1f5fe, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+
+/* ===============================
+   LOGIN CONTAINER
+================================ */
+.login-container {
+  width: 100%;
+  max-width: 380px;
+  background: #ffffff;
+  padding: 28px 26px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+/* Title */
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #0277bd;
+  font-weight: 600;
+}
+
+/* ===============================
+   FORM
+================================ */
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+  font-size: 14px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.login-container input:focus {
+  outline: none;
+  border-color: #0277bd;
+  box-shadow: 0 0 0 2px rgba(2, 119, 189, 0.15);
+}
+
+/* Login button */
+.login-container button[type="submit"] {
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #0277bd;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.15s;
+}
+
+.login-container button[type="submit"]:hover {
+  background: #01579b;
+  transform: translateY(-1px);
+}
+
+/* ===============================
+   MESSAGE
+================================ */
+#loginMsg {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+/* ===============================
+   REGISTER LINK
+================================ */
+.register-text {
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.register-text a {
+  color: #0277bd;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   SOCIAL LOGIN
+================================ */
+.social-login {
+  margin-top: 22px;
+}
+
+.social-login p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-buttons button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: #fafafa;
+  cursor: not-allowed;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #555;
+}
+
+/* Google */
+.google-btn i {
+  color: #db4437;
+}
+
+/* Facebook */
+.facebook-btn i {
+  color: #1877f2;
+}
+
+/* ===============================
+   GUEST LOGIN
+================================ */
+.guest-login {
+  margin-top: 20px;
+}
+
+.guest-login p {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.guest-login button {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px dashed #0277bd;
+  background: transparent;
+  color: #0277bd;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.guest-login button:hover {
+  background: #0277bd;
+  color: #ffffff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 420px) {
+  .login-container {
+    margin: 0 14px;
+    padding: 24px 20px;
+  }
+}

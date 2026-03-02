@@ -1,71 +1,120 @@
-/* DARK MODE */
-const toggleThemeBtn = document.getElementById("toggleTheme");
+/* =========================
+   SAFE DOM READY WRAPPER
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
 
-toggleThemeBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark-theme");
+  /* =========================
+     DARK MODE
+  ========================= */
 
-  const icon = toggleThemeBtn.querySelector("i");
-  icon.classList.toggle("fa-moon");
-  icon.classList.toggle("fa-sun");
+  const toggleThemeBtn = document.getElementById("toggleTheme");
 
-  localStorage.setItem(
-    "theme",
-    document.body.classList.contains("dark-theme") ? "dark" : "light"
-  );
-});
+  // Apply saved theme early
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+  }
 
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-theme");
-  toggleThemeBtn.querySelector("i").classList.replace("fa-moon", "fa-sun");
-}
+  if (toggleThemeBtn) {
+    const icon = toggleThemeBtn.querySelector("i");
 
-/* SEARCH */
-const searchInput = document.getElementById("searchInput");
+    // Fix icon on load
+    if (document.body.classList.contains("dark-theme")) {
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    }
 
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-  const videoCards = document.querySelectorAll(".video-card");
+    toggleThemeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-theme");
 
-  videoCards.forEach(card => {
-    const title = card.querySelector(".video-title").innerText.toLowerCase();
-    const desc  = card.querySelector(".video-desc").innerText.toLowerCase();
+      const isDark = document.body.classList.contains("dark-theme");
 
-    card.style.display =
-      title.includes(query) || desc.includes(query)
-      ? "block"
-      : "none";
+      icon.classList.toggle("fa-moon", !isDark);
+      icon.classList.toggle("fa-sun", isDark);
+
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+  }
+
+  /* =========================
+     SEARCH (Debounced)
+  ========================= */
+
+  const searchInput = document.getElementById("searchInput");
+
+  if (searchInput) {
+    let debounceTimer;
+
+    searchInput.addEventListener("input", () => {
+      clearTimeout(debounceTimer);
+
+      debounceTimer = setTimeout(() => {
+        const query = searchInput.value.toLowerCase().trim();
+        const videoCards = document.querySelectorAll(".video-card");
+
+        videoCards.forEach(card => {
+          const titleEl = card.querySelector(".video-title");
+          const descEl  = card.querySelector(".video-desc");
+
+          const title = titleEl ? titleEl.textContent.toLowerCase() : "";
+          const desc  = descEl ? descEl.textContent.toLowerCase() : "";
+
+          const match = title.includes(query) || desc.includes(query);
+
+          card.style.display = match ? "" : "none";
+        });
+
+      }, 200); // 200ms debounce
+    });
+  }
+
+  /* =========================
+     FOOTER ACTIVE LINK
+  ========================= */
+
+  const currentPage = window.location.pathname.split("/").pop();
+
+  document.querySelectorAll(".footer-nav a").forEach(link => {
+    const href = link.getAttribute("href");
+
+    if (href === currentPage) {
+      link.parentElement.classList.add("active");
+    }
   });
-});
 
-/* WATCH PAGE */
-function openWatch(id) {
-  window.location.href = "watch.php?id=" + id;
-}
+  /* =========================
+     DOWNLOAD BUTTON
+  ========================= */
 
-/* FOOTER ACTIVE */
-document.querySelectorAll(".footer-nav .nav-item").forEach(item => {
-  item.addEventListener("click", () => {
-    document.querySelectorAll(".footer-nav .nav-item")
-      .forEach(i => i.classList.remove("active"));
-    item.classList.add("active");
-  });
-});
+  const downloadBtn = document.getElementById("downloadBtn");
 
-/* DOWNLOAD */
-document.getElementById("downloadBtn")
-.addEventListener("click", () => {
-  alert("Download feature coming soon.");
-});
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", () => {
+      alert("Download feature coming soon.");
+    });
+  }
 
-/* NOTIFICATIONS */
-const notificationBtn = document.getElementById("notificationBtn");
-const notificationPanel = document.getElementById("notificationPanel");
+  /* =========================
+     NOTIFICATIONS
+  ========================= */
 
-notificationBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  notificationPanel.classList.toggle("show");
-});
+  const notificationBtn = document.getElementById("notificationBtn");
+  const notificationPanel = document.getElementById("notificationPanel");
 
-document.addEventListener("click", () => {
-  notificationPanel.classList.remove("show");
+  if (notificationBtn && notificationPanel) {
+
+    notificationBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      notificationPanel.classList.toggle("show");
+    });
+
+    notificationPanel.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+
+    document.addEventListener("click", () => {
+      notificationPanel.classList.remove("show");
+    });
+  }
+
 });

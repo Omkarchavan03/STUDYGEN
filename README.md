@@ -43,12 +43,12 @@ StudyGen combines the ease of video platforms with education-specific tools to c
 ## ⚙️ Installation
 
 1. Clone the repository:
-
+```
 git clone https://github.com/omkarchavan03/studygen.git
-
+```
 1. Install **XAMPP** or another local server  
 2. Import the MySQL database `studygen.sql`  
-3. Configure `config.php` with your database credentials and AI API keys  
+3. Configure `db.php` with your database credentials and AI API keys  
 4. Open the platform in your browser via your local server  
 
 ---

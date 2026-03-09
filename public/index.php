@@ -26,8 +26,8 @@ if (!$result) {
 ================================= */
 
 // Absolute filesystem paths (for file_exists)
-$thumbFsDir   = __DIR__ . "/app/uploads/thumbnails/";
-$profileFsDir = __DIR__ . "/app/uploads/profiles/";
+$thumbFsDir   = __DIR__ . "/app/uploads/thumbnails";
+$profileFsDir = __DIR__ . "/app/uploads/profile";
 
 // Public URL paths (for <img src>)
 $thumbUrlDir   = "app/uploads/thumbnails/";

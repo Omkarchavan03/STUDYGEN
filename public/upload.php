@@ -121,45 +121,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Upload • StudyGen</title>
 
 <link rel="stylesheet" href="assets/css/index.css">
-<link rel="stylesheet" href="assets/css/content.css">
+<link rel="stylesheet" href="assets/css/upload.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<style>
-.tabs { display:flex; gap:10px; margin-bottom:20px }
-.tab {
-  padding:10px 20px;
-  cursor:pointer;
-  background:#eee;
-  border-radius:6px;
-}
-.tab.active {
-  background:#2e7d32;
-  color:#fff;
-}
-.form { display:none }
-.form.active { display:block }
-
-progress {
-  width:100%;
-  height:16px;
-}
-
-#msg {
-  margin-top:10px;
-  font-weight:600;
-}
-</style>
 </head>
-
 <body>
+
+<!-- ================= HEADER ================= -->
+<header>
+    <h1>StudyGen Upload</h1>
+    <button class="theme-toggle" onclick="document.body.classList.toggle('dark-theme')">
+        <i class="fa-solid fa-moon"></i> Toggle Theme
+    </button>
+</header>
 
 <h2>Upload</h2>
 
 <div class="tabs">
-  <div class="tab active" onclick="switchTab('video')">Video</div>
-  <div class="tab" onclick="switchTab('econtent')">E-Content</div>
+  <div class="tab active" onclick="switchTab('video')">
+      <i class="fa-solid fa-video"></i> Video
+  </div>
+  <div class="tab" onclick="switchTab('econtent')">
+      <i class="fa-solid fa-file"></i> E-Content
+  </div>
 </div>
 
 <!-- ================= VIDEO FORM ================= -->
@@ -189,7 +177,7 @@ progress {
   <button type="submit">Upload Video</button>
 </form>
 
-<!-- ================= ECONTENT FORM ================= -->
+<!-- ================= E-CONTENT FORM ================= -->
 <form id="econtentForm" class="form" enctype="multipart/form-data">
   <input type="hidden" name="type" value="econtent">
 
@@ -205,8 +193,17 @@ progress {
 
   <button type="submit">Upload File</button>
 </form>
+<br>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    
+    <a href="index.php" style="color:var(--text-color); text-decoration:none;">
+        <i class="fa-solid fa-house"></i> Home
+    </a>
+    <p>&copy; <?= date('Y') ?> StudyGen. All rights reserved.</p>
+</footer>
 
 <script src="assets/js/upload.js"></script>
-
 </body>
 </html>

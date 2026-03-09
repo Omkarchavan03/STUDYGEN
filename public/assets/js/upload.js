@@ -1,26 +1,29 @@
-/* ================= TAB SWITCH ================= */
+/* ========================================
+   TAB SWITCH
+======================================== */
 function switchTab(tabId) {
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.classList.remove("active");
-  });
+  document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+  document.querySelectorAll(".form").forEach(form => form.classList.remove("active"));
 
-  document.querySelectorAll(".form").forEach(form => {
-    form.classList.remove("active");
-  });
+  const tab = document.querySelector(`.tab[data-tab="${tabId}"]`);
+  if (tab) tab.classList.add("active");
 
-  document.querySelector(`[onclick*="${tabId}"]`).classList.add("active");
-  document.getElementById(tabId + "Form").classList.add("active");
+  const form = document.getElementById(tabId + "Form");
+  if (form) form.classList.add("active");
 }
 
-/* ================= THUMBNAIL TOGGLE ================= */
+/* ========================================
+   THUMBNAIL TOGGLE
+======================================== */
 function toggleThumb(checkbox) {
   const thumbInput = document.getElementById("thumbInput");
   if (!thumbInput) return;
-
   thumbInput.style.display = checkbox.checked ? "block" : "none";
 }
 
-/* ================= RESET UI (FORM-SCOPED) ================= */
+/* ========================================
+   RESET UI (FORM-SCOPED)
+======================================== */
 function resetProgress(form) {
   const progress = form.querySelector("progress");
   const msg = form.querySelector("#msg");
@@ -29,7 +32,9 @@ function resetProgress(form) {
   if (msg) msg.innerHTML = "";
 }
 
-/* ================= AJAX UPLOAD ================= */
+/* ========================================
+   AJAX UPLOAD
+======================================== */
 function handleUpload(form) {
   const msg = form.querySelector("#msg");
   const progress = form.querySelector("progress");
@@ -41,14 +46,12 @@ function handleUpload(form) {
 
   xhr.open("POST", "upload.php", true);
 
-  /* progress */
   xhr.upload.onprogress = function (e) {
     if (e.lengthComputable && progress) {
       progress.value = Math.round((e.loaded / e.total) * 100);
     }
   };
 
-  /* response */
   xhr.onload = function () {
     if (xhr.status === 200) {
       if (xhr.responseText.trim() === "OK") {
@@ -58,14 +61,12 @@ function handleUpload(form) {
         form.reset();
         if (progress) progress.value = 0;
 
-        // hide thumbnail input after upload
         const thumb = document.getElementById("thumbInput");
         if (thumb) thumb.style.display = "none";
 
         setTimeout(() => {
           window.location.href = "profile.php";
         }, 1200);
-
       } else {
         msg.textContent = "❌ " + xhr.responseText;
         msg.style.color = "red";
@@ -84,9 +85,10 @@ function handleUpload(form) {
   xhr.send(formData);
 }
 
-/* ================= FORM BINDINGS ================= */
+/* ========================================
+   FORM BINDINGS
+======================================== */
 document.addEventListener("DOMContentLoaded", () => {
-
   const videoForm = document.getElementById("videoForm");
   const econtentForm = document.getElementById("econtentForm");
 
@@ -103,5 +105,39 @@ document.addEventListener("DOMContentLoaded", () => {
       handleUpload(this);
     });
   }
-
 });
+
+/* ========================================
+   THEME TOGGLE WITH ICON AND PERSISTENCE
+======================================== */
+(function() {
+  const toggleThemeBtn = document.getElementById("toggleTheme");
+  if (!toggleThemeBtn) return;
+
+  const icon = toggleThemeBtn.querySelector("i");
+  if (!icon) return;
+
+  // Apply saved theme on load
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") document.body.classList.add("dark-theme");
+
+  // Update icon based on current theme
+  function updateThemeIcon() {
+    if (document.body.classList.contains("dark-theme")) {
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    } else {
+      icon.classList.remove("fa-sun");
+      icon.classList.add("fa-moon");
+    }
+  }
+
+  updateThemeIcon();
+
+  // Toggle theme on click
+  toggleThemeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+    localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+    updateThemeIcon();
+  });
+})();

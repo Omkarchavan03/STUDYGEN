@@ -1,53 +1,467 @@
-/* ===== WATCH PAGE ===== */
+/* ========================================
+   GLOBAL THEME VARIABLES
+======================================== */
 
-.watch-wrapper {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 15px;
+:root{
+
+  --bg-color:#f9fafb;
+  --card-bg:#ffffff;
+  --text-color:#111827;
+  --muted-text:#6b7280;
+
+  --border-color:#d1d5db;
+
+  --btn-bg:#e1f5fe;
+  --btn-border:#0277bd;
+  --btn-text:#0277bd;
+  --btn-hover:#0277bd;
+  --btn-hover-text:#ffffff;
+
 }
 
-.video-title {
-    font-size: 22px;
-    margin-bottom: 10px;
+body.dark-theme{
+
+  --bg-color:#0f172a;
+  --card-bg:#1e1e1e;
+  --text-color:#e5e7eb;
+  --muted-text:#9ca3af;
+
+  --border-color:#444;
+
+  --btn-bg:#2a2a2a;
+  --btn-border:#555;
+  --btn-text:#e5e7eb;
+  --btn-hover:#0277bd;
+  --btn-hover-text:#ffffff;
+
 }
 
-.video-meta {
-    font-size: 13px;
-    color: #94a3b8;
-    margin-bottom: 15px;
+body{
+  background:var(--bg-color);
+  color:var(--text-color);
+  font-family:Arial, sans-serif;
+  margin:0;
 }
 
-.video-player {
+/* ========================================
+   HEADER BUTTONS
+======================================== */
+
+.right-section{
+
+display:flex;
+align-items:center;
+gap:10px;
+
+}
+
+.right-section button{
+
+  width:36px;
+  height:36px;
+
+  padding:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:8px;
+
+  border:1px solid var(--btn-border);
+  background:var(--btn-bg);
+  color:var(--btn-text);
+
+  cursor:pointer;
+  transition:0.2s;
+
+}
+
+.right-section button:hover{
+
+  background:var(--btn-hover);
+  color:var(--btn-hover-text);
+
+}
+
+/* ========================================
+   GLOBAL BUTTON STYLE
+======================================== */
+
+button,
+.action-buttons a{
+
+  padding:6px 14px;
+  border-radius:20px;
+
+  border:1px solid var(--btn-border);
+  background:var(--btn-bg);
+  color:var(--btn-text);
+
+  font-size:13px;
+  cursor:pointer;
+  transition:0.2s ease;
+
+}
+
+button:hover,
+.action-buttons a:hover{
+
+  background:var(--btn-hover);
+  color:var(--btn-hover-text);
+
+}
+
+/* ========================================
+   WATCH PAGE LAYOUT
+======================================== */
+
+.watch-page{
+
+  display:grid;
+
+  grid-template-columns:minmax(0,1fr) 320px;
+
+  gap:20px;
+
+  max-width:1300px;
+  margin:20px auto;
+
+  padding:0 20px;
+
+}
+
+/* ========================================
+   LEFT SIDE
+======================================== */
+
+.watch-container{
+  width:100%;
+}
+
+/* ========================================
+   VIDEO PLAYER
+======================================== */
+
+.watch-container video{
+
+  width:100%;
+  border-radius:12px;
+
+  background:#000;
+
+  box-shadow:0 6px 18px rgba(15,23,42,0.08);
+
+}
+
+.video-wrapper {
     position: relative;
-    background: black;
-    border-radius: 10px;
-    overflow: hidden;
+    width: 100%;       /* full width of container */
+    max-width: 1000px; /* optional max width */
+    margin: 0 auto;    /* center */
+    padding-top: 56.25%; /* 16:9 ratio (9/16 = 0.5625) */
 }
 
-video {
+.video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    border-radius: 4px; /* optional rounded corners */
 }
 
-/* Controls info */
-.video-info-box {
-    background: #020617;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
+/* ========================================
+   VIDEO TITLE
+======================================== */
+
+.watch-container h2{
+
+  font-size:20px;
+  font-weight:600;
+
+  margin:14px 0 6px;
+
 }
 
-.video-info-box p {
-    font-size: 14px;
-    color: #cbd5f5;
+.watch-container p{
+
+  font-size:13px;
+  color:var(--muted-text);
+  margin-bottom:16px;
+
 }
 
-/* Login prompt */
-.login-required {
-    background: #7f1d1d;
-    color: #fecaca;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 15px;
-    text-align: center;
+.collapsed{
+max-height:70px;
+overflow:hidden;
+}
+
+/* ========================================
+   CHANNEL BOX
+======================================== */
+
+.channel-box{
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  background:var(--card-bg);
+
+  border:1px solid var(--border-color);
+
+  padding:12px;
+
+  border-radius:12px;
+
+  margin-bottom:16px;
+
+}
+
+.channel-box img{
+
+  width:50px;
+  height:50px;
+
+  border-radius:50%;
+  object-fit:cover;
+
+}
+
+.channel-box button{
+margin-left:auto;
+}
+
+/* ========================================
+   ACTION BUTTONS
+======================================== */
+
+.action-buttons{
+
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:10px;
+  margin-bottom:20px;
+
+}
+
+.action-buttons .active{
+
+  background:var(--btn-hover);
+  color:var(--btn-hover-text);
+
+}
+
+/* ========================================
+   COMMENTS
+======================================== */
+
+#commentText{
+
+  width:100%;
+
+  padding:10px;
+
+  border-radius:10px;
+
+  border:1px solid var(--border-color);
+
+  background:var(--card-bg);
+  color:var(--text-color);
+
+  margin-bottom:10px;
+
+  resize:vertical;
+  min-height:80px;
+
+  font-family:inherit;
+
+}
+
+#commentSection{
+margin-top:16px;
+}
+
+.comment-box{
+
+  background:var(--card-bg);
+
+  border:1px solid var(--border-color);
+
+  padding:12px;
+
+  border-radius:12px;
+
+  margin-bottom:12px;
+
+  box-shadow:0 6px 18px rgba(15,23,42,0.06);
+
+}
+
+.comment-box strong{
+
+  display:block;
+
+  font-size:14px;
+
+  margin-bottom:4px;
+
+}
+
+.comment-box p{
+
+  font-size:13px;
+
+  color:var(--muted-text);
+
+  margin-bottom:8px;
+
+}
+
+.comment-box button{
+
+  padding:4px 10px;
+
+  border-radius:16px;
+
+  border:1px solid #e53935;
+
+  background:#ffebee;
+
+  color:#c62828;
+
+  font-size:12px;
+
+  cursor:pointer;
+
+}
+
+.comment-box button:hover{
+
+  background:#c62828;
+  color:#fff;
+
+}
+
+/* ========================================
+   VIDEO SUGGESTIONS
+======================================== */
+
+.suggestions{
+
+  display:flex;
+  flex-direction:column;
+
+  gap:14px;
+
+}
+
+.suggestion-card{
+
+  display:flex;
+  align-items:flex-start;
+
+  gap:10px;
+
+  text-decoration:none;
+  color:inherit;
+
+  transition:0.2s;
+
+}
+
+.suggestion-card:hover{
+
+  transform:translateY(-2px);
+  opacity:0.9;
+
+}
+
+.suggestion-card img{
+
+  width:140px;
+  height:80px;
+
+  object-fit:cover;
+
+  border-radius:8px;
+
+}
+
+.suggestion-info{
+font-size:13px;
+}
+
+.suggestion-info h4{
+
+  font-size:14px;
+  margin-bottom:4px;
+
+}
+
+.suggestion-info p{
+
+  font-size:12px;
+  color:var(--muted-text);
+
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width:1000px){
+
+.watch-page{
+grid-template-columns:minmax(0,1fr) 260px;
+}
+
+}
+
+/* ========================================
+   MOBILE RESPONSIVE
+======================================== */
+
+@media (max-width:900px){
+
+.watch-page{
+grid-template-columns:1fr;
+}
+
+.suggestions{
+margin-top:25px;
+}
+
+.suggestion-card img{
+width:120px;
+height:70px;
+}
+
+}
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width:600px){
+
+.watch-page{
+padding:0 12px;
+}
+
+.suggestion-card{
+gap:8px;
+}
+
+.suggestion-card img{
+width:110px;
+height:65px;
+}
+
+.watch-container h2{
+font-size:18px;
+}
+
 }
